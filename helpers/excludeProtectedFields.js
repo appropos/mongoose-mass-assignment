@@ -15,7 +15,8 @@ module.exports = function(mongooseModelTree,copiedData){
             var mongooseField = deepPath(mongooseModelTree,combinedPath)
 
             if(!mongooseField){  // mongoose does allow writing any data non-related to objects in nested schemas. we don't
-                delete object[property]
+                // Commented out to support "Mixed" field types
+                // delete object[property]
             }
             else if(object[property] instanceof Array){  //if array, do nested search for array
 
