@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var mongoose = require('mongoose');
 
 var helpers = require('./helpers')
@@ -16,7 +17,10 @@ module.exports = function (schema, options) {
   schema.method('massAssign', function (fields) {
     var safeFields = this.constructor.massUpdate(fields);
 
-    this.set(safeFields);
+    _.forEach(safeFields, function(value, name){
+        this[name] = value;
+    }, this);
+    // this.set(safeFields);
 
     return this;
   });
